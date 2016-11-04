@@ -1,7 +1,6 @@
 package mvpmaster.lht.com.lht.ui.fragment.zhuhu;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -31,11 +30,7 @@ public class ZhiHuFragment extends BaseFragment<ZhiHuContract.ZhiHuView, ZhiHuPr
     // 知乎日报需要的下一个参数
     private String time;
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        initConf();
-    }
+
 
     /**
      * 初始化配置
@@ -140,8 +135,7 @@ public class ZhiHuFragment extends BaseFragment<ZhiHuContract.ZhiHuView, ZhiHuPr
     @Override
     protected void initView(View rootView) {
         super.initView(rootView);
-        mLayoutManager = new LinearLayoutManager(getContext());
-        mRlvZhiHu.setLayoutManager(mLayoutManager);
+        initConf();
     }
 
     @Override

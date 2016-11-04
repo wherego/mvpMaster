@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -16,9 +18,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 import mvpmaster.lht.com.lht.R;
 import mvpmaster.lht.com.lht.base.BaseActivity;
 import mvpmaster.lht.com.lht.ui.beanIml.NewsDetailBean;
+import mvpmaster.lht.com.lht.utils.ShareUtils;
 
 
 /**
@@ -41,6 +45,15 @@ public class ZhiHuDetailActivity extends BaseActivity
     @Bind(R.id.tv_img_source)
     TextView mTvWebImgSource;
 
+
+    String title, text, imgPath;
+
+    @OnClick(R.id.fabt_share)
+    void share(View view) {
+        Log.e("LHT", "share: " + title);
+        Log.e("LHT", "share: " + text);
+        ShareUtils.shareMsg(mContext, "凌宇", text, title, R.drawable.share_img, true);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,9 +109,12 @@ public class ZhiHuDetailActivity extends BaseActivity
             String html = head + newsDetailBean.getBody().replace(img, " ");
             mWbHtmlPage.loadDataWithBaseURL(null, html, "text/html", "utf-8", null);
         }
-        Glide.with(mContext).load(newsDetailBean.getImage()).centerCrop().into(mIvWebImg);
-        mTvWebTitle.setText(newsDetailBean.getTitle());
-        mTvWebImgSource.setText(newsDetailBean.getImage_source());
+        title = newsDetailBean.getTitle();
+        text = newsDetailBean.getImage_source();
+        imgPath = newsDetailBean.getImage();
+        Glide.with(mContext).load(imgPath).centerCrop().into(mIvWebImg);
+        mTvWebTitle.setText(title);
+        mTvWebImgSource.setText(text);
     }
 
     @Override
