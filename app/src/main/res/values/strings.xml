@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">凌宇</string>
+    <string name="headline">大公司头条</string>
+    <string name="load_error">网络不见了~</string>
+</resources>
